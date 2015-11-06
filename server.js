@@ -14,7 +14,8 @@ io.on('connection', function(socket){        //listen for events
     socket.on('message', function(message){
         console.log('Message received: ' + message.text);
 
-        socket.broadcast.emit('message', message);
+        //socket.broadcast.emit('message', message);  sends to everyone EXCEPT who sent it.
+        io.emit('message', message);
     });
 
     socket.emit('message', {    //only get one arg.  Use an object to hold a bunch of stuff
