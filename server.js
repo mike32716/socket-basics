@@ -11,6 +11,28 @@ app.use(express.static(__dirname + '/public'));
 
 var clientInfo = {};  //unique socket id for individual and room
 
+// Sends current users to provided socket
+function sendCurrentUsers(socket){
+    var info = clientInfo[socket.id];
+    var users = [];
+
+    if(typeof info === 'undefined'){ return }
+
+    Object.keys(clientInfo).forEach(function(socketId){
+        var userInfo = clientInfo[socketId];
+        if (info.room === userInfo.room){
+            users.push(userInfo.name);
+        }
+    });
+    
+    socket.emit('message', {
+        name: 'System',
+        text: 'Current users: ' + users.join(', '),
+        timestamp: moment().valueOf()
+    });
+    
+}
+
 
 
 io.on('connection', function(socket){        //listen for events
@@ -64,10 +86,19 @@ io.on('connection', function(socket){        //listen for events
 
     socket.on('message', function(message) {
         console.log('Message received: '  + message.text);
+        //check to see if user is asking for list of users in a room.
+        if(message.text === '@currentUsers'){
+        
+            sendCurrentUsers(socket);
+        
+        } else {
 
-        message.timestamp =  moment().valueOf();  //1444247486704;
-        //socket.broadcast.emit('message', message);  sends to everyone EXCEPT who sent it.
-        io.to(clientInfo[socket.id].room).emit('message', message);  //gets timestamp and messge from sender and sends out
+            message.timestamp =  moment().valueOf();  //1444247486704;
+            //socket.broadcast.emit('message', message);  sends to everyone EXCEPT who sent it.
+            io.to(clientInfo[socket.id].room).emit('message', message);  //gets timestamp and messge from sender and sends out
+
+        }
+       
     });
 
 
@@ -94,19 +125,6 @@ io.on('connection', function(socket){        //listen for events
 http.listen(PORT, function(){
    console.log('Server started!');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
