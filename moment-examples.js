@@ -28,3 +28,6 @@ console.log('The time is: ' + myTime );
 var timestamp = 1444247486704;
 var timestampMoment = moment.utc(timestamp);  //accessing moments UTC property
 console.log('Converted time is: ' + timestampMoment.local().format('h:mm a') ) ;
+
+var mikeStamp = now.format('X');
+console.log(mikeStamp);
