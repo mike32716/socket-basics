@@ -29,6 +29,7 @@ io.on('connection', function(socket){        //listen for events
    //var timeStamp = now.format('MMM Do YYYY, h:mm a');
     //This is the initial message and then it does nothing else.
     socket.emit('message', {    //only get one arg.  Use an object to hold a bunch of stuff
+        name: 'System',
         text: 'Welcome to the chat application!',
         timestamp: moment().valueOf()
     });

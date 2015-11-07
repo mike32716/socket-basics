@@ -1,5 +1,9 @@
 // APP.JS
 // This is front end script.  Requires moment.js to work
+var name = getQueryVariable('name') || "Anonymous Coward";  //users Andrews functin to get params
+var room = getQueryVariable('room');  // if not defined then use name Anonymous
+console.log(name + ' joined ' + room);
+
 var socket = io();
 
 socket.on('connect', function(){
@@ -11,13 +15,15 @@ socket.on('connect', function(){
 socket.on('message', function(message){
 
     var momentTimestamp = moment.utc(message.timestamp);  //gets message.timestamp from server?
+    var $message = jQuery('.messages');
 
     console.log('New browser console message: ');
     console.log('check momentTimestamp: ' + momentTimestamp);
     console.log(message.text);
 
-    jQuery('.messages').append('<p><strong>' + momentTimestamp.local().format('h:mm a') + ':</strong> ' + message.text + '</p>');
-
+    $message.append('<p><strong>' + message.name + ' ' +  momentTimestamp.local().format('h:mm a') + '</strong></p>');
+    //jQuery('.messages').append('<p><strong>' + momentTimestamp.local().format('h:mm a') + ':</strong> ' + message.text + '</p>');
+    $message.append('<p>' + message.text + '</p>');
 
 });
 
@@ -34,6 +40,7 @@ $form.on('submit', function(event){
     event.preventDefault();
 
     socket.emit('message', {
+            name: name,
             text: $form.find('input[name=message]').val()
                   });
 
