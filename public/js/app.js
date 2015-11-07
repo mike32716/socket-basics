@@ -4,10 +4,19 @@ var name = getQueryVariable('name') || "Anonymous Coward";  //users Andrews func
 var room = getQueryVariable('room');  // if not defined then use name Anonymous
 console.log(name + ' joined ' + room);
 
+jQuery('.room-title').text(room).css("color", "blue");
+
+
 var socket = io();
 
 socket.on('connect', function(){
     console.log('Connected to socket.io server!!!');  // Prints to browser console once ON connect.
+   
+   socket.emit('joinRoom', {  // This bit of code is to segregate rooms
+            name: name,       // tells server.js what room want to join.
+            room: room
+        });
+
 });
 
 
