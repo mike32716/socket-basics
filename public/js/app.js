@@ -2,18 +2,21 @@
 // This is front end script.  Requires moment.js to work
 var name = getQueryVariable('name') || "Anonymous Coward";  //users Andrews functin to get params
 var room = getQueryVariable('room');  // if not defined then use name Anonymous
-console.log(name + ' joined ' + room);
+var socket = io();
 
+console.log('browserconsole: ' + name + ' joined ' + room);
+
+// update room title heading
 jQuery('.room-title').text(room).css("color", "blue");
 
 
-var socket = io();
+
 
 socket.on('connect', function(){
     console.log('Connected to socket.io server!!!');  // Prints to browser console once ON connect.
    
-   socket.emit('joinRoom', {  // This bit of code is to segregate rooms
-            name: name,       // tells server.js what room want to join.
+    socket.emit('joinRoom', {
+            name: name, 
             room: room
         });
 

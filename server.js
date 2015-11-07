@@ -16,10 +16,37 @@ var clientInfo = {};  //unique socket id for individual and room
 io.on('connection', function(socket){        //listen for events
     console.log('User connected via socket.io!');
 
+
+
+    socket.on('disconnect', function(){
+    
+    console.log('A USER is disconnecting form a room.');
+
+        var userData = clientInfo[socket.id];  // unique user id assigned by socket.io
+
+
+        if (typeof userData !== 'undefined') {
+
+            console.log('A user has left a room!!!!!!');
+            
+            socket.leave(userData.room);
+
+            io.to(userData.room).emit('message', {
+                name: 'System',
+                text: userData.name + ' has left the room!',
+                timestamp: moment().valueOf()
+            });
+
+            delete clientInfo[socket.id];
+        }
+    });
+
+
+
     
     socket.on('joinRoom', function(req){   //code to handle room request
         
-        clientInfo[socket.id] = req;
+        clientInfo[socket.id] = req;  //uses empty object created above.
 
         socket.join(req.room);
 
@@ -33,6 +60,8 @@ io.on('connection', function(socket){        //listen for events
 
 
 
+
+
     socket.on('message', function(message) {
         console.log('Message received: '  + message.text);
 
@@ -40,6 +69,8 @@ io.on('connection', function(socket){        //listen for events
         //socket.broadcast.emit('message', message);  sends to everyone EXCEPT who sent it.
         io.to(clientInfo[socket.id].room).emit('message', message);  //gets timestamp and messge from sender and sends out
     });
+
+
 
 
 
