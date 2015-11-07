@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TobbyChat</title>
+    </head>
+
+
+    <body>
+        <h1>Tobby's Chat App</h1>
+
+        
+            <form action="/index.html">    
+                <input type="submit" value="Change settings" />
+            </form>
+
+        
+            <div class="messages">
+                <!-- Messages end up here -->
+            </div>
+
+
+            <form id="message-form">
+                <input type="text" name="message" placeholder="Enter message" />
+                <input type="submit"/>
+            </form>
+
+
+
+
+        <script src="/js/jquery-2.1.4.min.js"></script>
+        <script src="/js/socket.io-1.3.7.js"></script>
+        <script src="/js/moment.js"></script>
+        <script src="/js/QueryParams.js"></script>
+        <script src="/js/app.js"></script>
+
+    </body>
+</html>
