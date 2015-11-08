@@ -23,30 +23,37 @@ socket.on('connect', function(){
 });
 
 
+
+
 // Takes the messages object and prints to browser via jQuery.
 socket.on('message', function(message){
 
     var momentTimestamp = moment.utc(message.timestamp);  //gets message.timestamp from server?
-    var $message = jQuery('.messages');
+    var $messages = jQuery('.messages');  //Gets the message from the user input
+    var $message  = jQuery('<li class="list-group-item"></li>');  //to format the message
 
     console.log('New browser console message: ');
     console.log('check momentTimestamp: ' + momentTimestamp);
     console.log(message.text);
+    
 
     $message.append('<p><strong>' + message.name + ' ' +  momentTimestamp.local().format('h:mm a') + '</strong></p>');
     //jQuery('.messages').append('<p><strong>' + momentTimestamp.local().format('h:mm a') + ':</strong> ' + message.text + '</p>');
     $message.append('<p>' + message.text + '</p>');
+  
+    $messages.append($message);
 
 });
 
 
 
+
+
 // Handles submitting of new message
 var $form = jQuery('#message-form');   // only use $ to say it is jquer element
+
 //console.log($form);
 
-//var now = moment();
-//var timeStamp = now.format('h:mm a');
 
 $form.on('submit', function(event){
     event.preventDefault();
@@ -56,5 +63,6 @@ $form.on('submit', function(event){
             text: $form.find('input[name=message]').val()
                   });
 
-    $form.find('input[name=message]').val('');  //delete input box after submit
+    $form.find('input[name=message]').val('').focus();  //delete input box after submit and give focus
 });
+

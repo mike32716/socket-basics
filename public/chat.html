@@ -4,31 +4,56 @@
         <meta charset="UTF-8">
         <title>TobbyChat</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/styles.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
 
     <body>
-        <h1>Tobby's Excellent Chat App</h1>
+        <div class="verticle-center">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-6 col-md-offset-3 well">
 
-            <a href="/index.html">Change Settings</a>
+                            <h1>Tobby's Chat App</h1>
 
-            <!-- <form action="/index.html">  
-                <input type="submit" value="Change settings" />
-            </form>
- -->
+                            <a href="/index.html">Change Settings</a>
+                            
+                            <h2 class="room-title">Room</h2>
+                        
+                            <ul class="messages list-group">
+                            </ul>
 
-            <h2 class="room-title">Room</h2>
-        
-            <div class="messages">
-                <!-- Messages end up here -->
+                            
+                            <form id="message-form">
+
+                                <div class="form-group">
+                                    
+                                    <div class="input-group"> 
+
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-comment"></i>
+                                        </span> 
+                                       
+                                        <input type="text" class="form-control" name="message" placeholder="Enter Message" />
+                                    
+                                    </div>
+
+                                </div>
+
+                                                               
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-info btn-block" value="Send Message" />
+                                </div>
+                             
+                            </form>
+
+                            
+                        
+                    </div>
+                </div>
             </div>
-
-
-            <form id="message-form">
-                <input type="text" name="message" placeholder="Enter message" />
-                <input type="submit"/>
-            </form>
+        </div>
 
 
 
