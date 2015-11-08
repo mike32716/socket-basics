@@ -3,26 +3,56 @@
     <head>
         <meta charset="UTF-8">
         <title>TobbyChat</title>
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
 
     <body>
-        <h1>Tobby's Chat App</h1>
-        <h2>Join Chat!</h2>
+        
+        <div class="verticle-center">
+            <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 well">
 
-            <form action="/chat.html">
-                
-                <label>Display Name</label>    
-                <input type="text" name="name"/><br>  
+                    <h1>Tobby's Chat App</h1>
+                    <h2>Join Chat!</h2>
 
-                <label>Room Name</label>  
-                <input type="text" name="room"/><br>  
+                    <form action="/chat.html">
 
-                <input type="submit" value="Join Chat" />
-            </form>
+                        <div class="form-group">
+                            <label>Display Name</label>   
+                            <div class="input-group"> 
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </span>
+                                <input type="text" class="form-control" name="name" placeholder="Name" />
+                            </div>
+                        </div>
+                        
+                    
+                        <div class="form-group">
+                            <label>Room Name</label> 
+                            <div class="input-group"> 
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                </span> 
+                                <input type="text" class="form-control" name="room" placeholder="Room Name" />
+                            </div>
+                        </div>
 
-            
 
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block" value="Join Chat" />
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        </div>  
 
     </body>
 </html>
