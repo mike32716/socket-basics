@@ -1,3 +1,16 @@
+h1  {
+    margin: 24px 0 24px 0;
+}
+
+.messages p {
+    margin: 6px 0px 6px 25px;
+    color:purple;
+}
+
+.messages p strong {
+    margin-left: -25px;
+    color: #666;
+}
 
 
 .verticle-center{
