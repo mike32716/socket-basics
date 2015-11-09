@@ -37,7 +37,7 @@ socket.on('message', function(message){
     console.log(message.text);
     
 
-    $message.append('<p><strong>' + message.name + ' ' +  momentTimestamp.local().format('h:mm a') + '</strong></p>');
+    $message.append('<p><strong><span id= "messagename">' + message.name +  '</span><span id= "thetimestamp">  @' +  momentTimestamp.local().format('h:mm a') + '</span></strong></p>');
     //jQuery('.messages').append('<p><strong>' + momentTimestamp.local().format('h:mm a') + ':</strong> ' + message.text + '</p>');
     $message.append('<p>' + message.text + '</p>');
   

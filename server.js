@@ -11,6 +11,8 @@ app.use(express.static(__dirname + '/public'));
 
 var clientInfo = {};  //unique socket id for individual and room
 
+
+
 // Sends current users to provided socket
 function sendCurrentUsers(socket){
     var info = clientInfo[socket.id];
@@ -29,7 +31,9 @@ function sendCurrentUsers(socket){
         name: 'System',
         text: 'Current users: ' + users.join(', '),
         timestamp: moment().valueOf()
+        
     });
+    
     
 }
 
@@ -57,6 +61,7 @@ io.on('connection', function(socket){        //listen for events
                 name: 'System',
                 text: userData.name + ' has left the room!',
                 timestamp: moment().valueOf()
+                
             });
 
             delete clientInfo[socket.id];
@@ -119,6 +124,17 @@ io.on('connection', function(socket){        //listen for events
 
 
 });
+
+//*************************************************************
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+//**********************************************************************8
 
 
 //*****************************************
